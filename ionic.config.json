@@ -1,0 +1,7 @@
+{
+  "name": "zuletaApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

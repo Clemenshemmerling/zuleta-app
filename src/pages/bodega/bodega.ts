@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController  } from 'ionic-angular';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import { AuthService } from '../../services/auth';
 import { HttpParams } from '@angular/common/http';
+import { ListboPage } from '../listbo/listbo';
 
 /**
  * Generated class for the BodegaPage page.
@@ -121,7 +122,8 @@ export class BodegaPage {
   ]
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public scanner: BarcodeScanner, private autService: AuthService) {
+              public scanner: BarcodeScanner, private autService: AuthService,
+              public toastCtrl: ToastController) {
     this.user = JSON.parse(localStorage.getItem('logUser'));
   }
 
@@ -137,7 +139,7 @@ export class BodegaPage {
       (data) => {
         this.scanData = data;
         this.track = data.text;
-        this.post();
+        this.show = "scan";
       },
       (error) => {
         console.log(error);
@@ -155,11 +157,21 @@ export class BodegaPage {
     this.autService.post(this.urlPost, data).subscribe(
       (res) => {
         this.scan();
+        let toast = this.toastCtrl.create({
+          message: 'Se agrego correctamente',
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
       }, (error) => {
         console.log(error);
         this.error = error;
       }
     );
+  }
+
+  list(){
+    this.navCtrl.push(ListboPage);
   }
 
 }

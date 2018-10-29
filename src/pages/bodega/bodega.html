@@ -28,6 +28,16 @@
     </ion-item>
     <button ion-button block (click)="scan()">Scannear</button>
   </div>
-
+  <div *ngIf="show=='scan'">
+    <ion-item>
+      <ion-label>
+        <p>{{ track }}</p>
+      </ion-label>
+    </ion-item>
+    <button ion-button block (click)="post()">Guardar</button>
+  </div>
+  <div>
+    <button ion-button block (click)="list()">Ir a listado</button>
+  </div>
 
 </ion-content>

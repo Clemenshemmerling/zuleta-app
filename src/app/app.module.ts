@@ -19,6 +19,7 @@ import { HTTP } from '@ionic-native/http';
 import { Platform } from 'ionic-angular';
 import { NativeHttpModule, NativeHttpBackend, NativeHttpFallback } from 'ionic-native-http-connection-backend';
 import { BodegaPage } from '../pages/bodega/bodega';
+import { ListboPage } from '../pages/listbo/listbo';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { BodegaPage } from '../pages/bodega/bodega';
     LoginPage,
     ScanPage,
     RecivePage,
-    BodegaPage
+    BodegaPage,
+    ListboPage
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,8 @@ import { BodegaPage } from '../pages/bodega/bodega';
     LoginPage,
     ScanPage,
     RecivePage,
-    BodegaPage
+    BodegaPage,
+    ListboPage
   ],
   providers: [
     StatusBar,

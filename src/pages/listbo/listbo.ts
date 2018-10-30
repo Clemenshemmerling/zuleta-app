@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthService } from '../../services/auth';
-import { ThrowStmt } from '@angular/compiler';
 
 /**
  * Generated class for the ListboPage page.
@@ -22,8 +21,10 @@ export class ListboPage {
   unscandata:any;
   spinner:boolean = true;
   envio:string;
-  scan:any;
+  scan:any =[];
   unscan:any;
+  scanShow: boolean = false;
+  unscanShow: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public authService:AuthService) {
@@ -47,11 +48,19 @@ export class ListboPage {
 
   search() {
     for(let i = 0; i < this.scandata.length; i++) {
-      if(this.envio === this.scandata[i].numViaje) {
+      console.log(this.scandata[i].numViaje);
+      if(this.envio == this.scandata[i].numViaje) {
         this.scan.push(this.scandata[i]);
-        console.log(this.scan);
       }
-    } 
+    }
+  }
+
+  listscan() {
+    if(this.scanShow == true) {
+      this.scanShow = false;
+    } else {
+      this.scanShow = true;
+    }
   }
 
   ionViewDidLoad() {

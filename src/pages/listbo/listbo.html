@@ -21,7 +21,7 @@
     <ion-row>
       <ion-col col-8>
         <ion-item>
-          <ion-label>Numero de envio</ion-label>
+          <ion-label>No envio</ion-label>
           <ion-input type="text" [(ngModel)]="envio"></ion-input>  
         </ion-item>
       </ion-col>
@@ -29,5 +29,18 @@
         <button ion-button block (click)="search()">Buscar</button>
       </ion-col> 
     </ion-row>
+    <ion-list>
+      <ion-list-header (click)="listscan()">Scaneado</ion-list-header>
+      <div *ngIf="scanShow === true">
+        <ion-item-group *ngFor="let s of scan">
+          <ion-item>
+            {{ s.cons_no }}
+            <div class="item-note" item-end>
+              {{s.facturaff}}
+            </div>
+          </ion-item>
+        </ion-item-group>
+      </div>
+    </ion-list>
   </div>
 </ion-content>

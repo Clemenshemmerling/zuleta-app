@@ -21,7 +21,7 @@
     <ion-row>
       <ion-col col-8>
         <ion-item>
-          <ion-label>No envio</ion-label>
+          <ion-label floating>No envio</ion-label>
           <ion-input type="text" [(ngModel)]="envio"></ion-input>  
         </ion-item>
       </ion-col>
@@ -29,18 +29,29 @@
         <button ion-button block (click)="search()">Buscar</button>
       </ion-col> 
     </ion-row>
-    <ion-list>
-      <ion-list-header (click)="listscan()">Scaneado</ion-list-header>
-      <div *ngIf="scanShow === true">
-        <ion-item-group *ngFor="let s of scan">
-          <ion-item>
-            {{ s.cons_no }}
-            <div class="item-note" item-end>
-              {{s.facturaff}}
-            </div>
-          </ion-item>
-        </ion-item-group>
-      </div>
+    <button ion-button color="secondary" clear block (click)="listunscan()">No Escaneado</button>
+    <ion-list *ngIf="unscanShow === true"> 
+      <ion-item *ngFor="let u of unscan">
+        <h2>{{ u.cons_no }}</h2>           
+        <h3>{{ u.facturaff }}</h3>
+        <p>{{ u.box }}</p>
+      </ion-item>
+    </ion-list>
+    <button ion-button color="secondary" clear block (click)="listscan()">Escaneado</button>
+    <ion-list *ngIf="scanShow === true">
+      <ion-item-sliding *ngFor="let s of scan"> 
+        <ion-item> 
+          <h2>{{ s.cons_no }}</h2>
+          <h3>{{ s.facturaff }}</h3>
+          <p>{{ s.box }}</p>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="danger" (click)="borrar(s)">
+            <ion-icon name="trash"></ion-icon>
+            Quitar
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
     </ion-list>
   </div>
 </ion-content>

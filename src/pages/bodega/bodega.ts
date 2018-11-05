@@ -26,7 +26,7 @@ export class BodegaPage {
   envio:string;
   user:any;
   show:string = "home";
-  urlPost:string = "http://trackenviosinternacional.com/tracking/deprixa/scantest.php";
+  urlPost:string = "http://trackenviosinternacional.com/tracking/deprixa/appscan.php";
   error:any;
   info:any = [
     {

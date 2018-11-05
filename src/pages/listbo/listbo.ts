@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthService } from '../../services/auth';
-
+import { HttpParams } from '@angular/common/http';
 /**
  * Generated class for the ListboPage page.
  *
@@ -15,19 +15,26 @@ import { AuthService } from '../../services/auth';
   templateUrl: 'listbo.html',
 })
 export class ListboPage {
-  urlScan: string = "http://trackenviosinternacional.com/tracking/deprixa/listscan.php";
+  urlScan: string ="http://trackenviosinternacional.com/tracking/deprixa/listscan.php";
   urlUnscan: string ="http://trackenviosinternacional.com/tracking/deprixa/listunscan.php";
+  urlDelete: string ="http://trackenviosinternacional.com/tracking/deprixa/appunscan.php";
   scandata: any;
   unscandata:any;
   spinner:boolean = true;
   envio:string;
   scan:any =[];
-  unscan:any;
+  unscan:any = [];
+  user:any = [];
   scanShow: boolean = false;
   unscanShow: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public authService:AuthService) {
+    this.user = JSON.parse(localStorage.getItem('logUser'));            
+    this.api();
+  }
+
+  api() {
     this.authService.get(this.urlScan).subscribe(
       (data) => {
         this.scandata = data;
@@ -47,12 +54,22 @@ export class ListboPage {
   }
 
   search() {
+    this.spinner = true;
+    
     for(let i = 0; i < this.scandata.length; i++) {
-      console.log(this.scandata[i].numViaje);
       if(this.envio == this.scandata[i].numViaje) {
         this.scan.push(this.scandata[i]);
       }
     }
+
+    for(let i = 0; i < this.unscandata.length; i++) {
+      if(this.envio == this.unscandata[i].numViaje) {
+        this.unscan.push(this.unscandata[i]);
+      }
+    }
+
+    this.spinner = false;
+    console.log(this.spinner);
   }
 
   listscan() {
@@ -61,6 +78,29 @@ export class ListboPage {
     } else {
       this.scanShow = true;
     }
+  }
+
+  listunscan() {
+    if(this.unscanShow == true) {
+      this.unscanShow = false;
+    } else {
+      this.unscanShow = true;
+    }
+  }
+
+  borrar(r) {
+    this.spinner = true;
+    const data = new HttpParams()
+      .set('cid', r.cid)
+      .set('user', this.user.name);
+    
+    this.authService.post(this.urlDelete, data).subscribe(
+      (res) => {
+        this.api();
+      }, (error) => {
+        console.log(error);
+      }
+    );  
   }
 
   ionViewDidLoad() {

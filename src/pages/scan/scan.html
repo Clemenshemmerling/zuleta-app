@@ -19,19 +19,19 @@
   <div *ngIf="spinner === false">
     <div *ngIf="show === 'home'">
       <ion-item>
-        <ion-label>Estado</ion-label>
+        <ion-label floating>Estado</ion-label>
         <ion-select [(ngModel)]="state" (ionChange)="agent()">
           <ion-option *ngFor="let s of states">{{s.nombre}}</ion-option>
         </ion-select>  
       </ion-item>
       <ion-item>
-        <ion-label>Agencia</ion-label>
+        <ion-label floating>Agencia</ion-label>
         <ion-select [(ngModel)]="agente" (ionChange)="size()">
           <ion-option *ngFor="let a of agentes">{{a.nombre}}</ion-option>
         </ion-select>  
       </ion-item>
       <ion-item>
-        <ion-label>Tamaño</ion-label>
+        <ion-label floating>Tamaño</ion-label>
         <ion-select [(ngModel)]="box">
           <ion-option *ngFor="let b of boxes">{{b.tamano}}</ion-option>
         </ion-select>  
